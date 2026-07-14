@@ -34,12 +34,13 @@
     <!-- ==================== HEADER / NAVBAR ==================== -->
     <header id="mainHeader" class="site-header">
       <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
+        <div class="container-fluid px-lg-5 px-4">
+
          <!-- Logo -->
                 <a class="navbar-brand d-flex align-items-center" href="#home">
                     <img src="assests/main-logo.png" alt="TaskTel Technologies" class="logo-img">
                 </a>
-          </a>
+          
           <!-- Mobile Toggler -->
           <button
             class="navbar-toggler"
@@ -56,9 +57,9 @@
           <!-- Nav Links -->
           <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav mx-auto main-nav">
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link active" href="#home">Home</a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a class="nav-link" href="#about">About</a>
               </li>
@@ -89,138 +90,117 @@
     </header>
 
     <!-- ==================== HERO SECTION ==================== -->
-    <section id="home" class="hero-section">
-      <div class="container">
-        <div class="row align-items-center gy-5">
-          <!-- Left Column: Text Content -->
-          <div class="col-lg-6 hero-fade" data-delay="0">
-            <span class="hero-badge">
-              Smart Workplace &nbsp;•&nbsp; AV Integration &nbsp;•&nbsp; Unified
-              Communication
+
+    
+
+           <!-- Right Column: Hero Image Slideshow -->
+          <section class="hero-section" id="home">
+ 
+    <!-- 1. Background image slider — images live as full-bleed divs,
+         never inside a content card. JS cross-fades them every 4s. -->
+    <div class="hero-bg-slider" id="heroBgSlider" aria-hidden="true">
+
+    <div class="hero-bg-slide is-active"
+         style="background-image:url('assests/hero_imgs/img1.png');"></div>
+
+    <div class="hero-bg-slide"
+         style="background-image:url('assests/hero_imgs/img2.png');"></div>
+
+    <div class="hero-bg-slide"
+         style="background-image:url('assests/hero_imgs/img3.png');"></div>
+
+    <div class="hero-bg-slide"
+         style="background-image:url('assests/hero_imgs/img4.png');"></div>
+
+    <div class="hero-bg-slide"
+         style="background-image:url('assests/hero_imgs/img5.png');"></div>
+
+    <div class="hero-bg-slide"
+         style="background-image:url('assests/hero_imgs/img6.png');"></div>
+
+    <div class="hero-bg-slide"
+         style="background-image:url('assests/hero_imgs/img7.png');"></div>
+
+    <div class="hero-bg-slide"
+         style="background-image:url('assests/hero_imgs/img8.png');"></div>
+
+    <div class="hero-bg-slide"
+         style="background-image:url('assests/hero_imgs/img9.png');"></div>
+
+</div>
+ 
+    <!-- 2. Dark blue transparent overlay for text legibility -->
+    <div class="hero-overlay" aria-hidden="true"></div>
+ 
+    <!-- 3. Animated SVG wave — spans the full section, left side to right -->
+    <div class="hero-wave-bg" aria-hidden="true">
+      <svg class="wave wave-back" viewBox="0 0 2400 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,220 C300,300 600,140 900,200 C1200,260 1500,120 1800,180 C2000,220 2200,200 2400,210
+                 L2400,400 L0,400 Z
+                 M2400,210 C2700,300 3000,140 3300,200 C3600,260 3900,120 4200,180 C4400,220 4600,200 4800,210
+                 L4800,400 L2400,400 Z" />
+      </svg>
+      <svg class="wave wave-front" viewBox="0 0 2400 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,260 C250,200 550,300 850,260 C1150,220 1450,300 1750,260 C2000,230 2200,250 2400,260
+                 L2400,400 L0,400 Z
+                 M2400,260 C2650,200 2950,300 3250,260 C3550,220 3850,300 4150,260 C4400,230 4600,250 4800,260
+                 L4800,400 L2400,400 Z" />
+      </svg>
+    </div>
+ 
+    <!-- 4. Floating decorative circles -->
+    <div class="hero-floating-shapes" aria-hidden="true">
+      <span class="float-circle circle-1"></span>
+      <span class="float-circle circle-2"></span>
+      <span class="float-circle circle-3"></span>
+      <span class="float-circle circle-4"></span>
+    </div>
+ 
+    <!-- 5. Content -->
+    <!-- HERO CONTENT -->
+<div class="hero-content">
+
+    <div class="hero-text">
+
+        <span class="hero-badge hero-fade" data-delay="0">
+            Smart Workplace • AV Integration • Unified Communication
+        </span>
+
+        <h1 class="hero-heading hero-fade" data-delay="120">
+            Transform Your Workplace With
+            <span class="text-highlight">
+                Intelligent Collaboration Solutions
             </span>
+        </h1>
 
-            <h1 class="hero-heading">
-              Transform Your Workplace With
-              <span class="text-highlight">Intelligent
-              Collaboration Solutions</span>
-            </h1>
+        <p class="hero-description hero-fade" data-delay="240">
+            Tasktel Technologies designs, integrates, and supports intelligent
+            meeting rooms, AV systems, unified communications, digital signage,
+            and smart workplace solutions that empower enterprises to collaborate
+            more effectively.
+        </p>
 
-            <p class="hero-description">
-              TaskTel designs, integrates, and supports intelligent meeting
-              rooms, AV systems, unified communications, digital signage, and
-              smart workplace solutions that empower enterprises to collaborate
-              more effectively.
-            </p>
+        <div class="hero-cta hero-fade" data-delay="360">
 
-            <div class="hero-cta d-flex flex-wrap gap-3">
-              <a href="#demo" class="btn btn-primary-cta">
-                Request Demo <i class="bi bi-arrow-right ms-2"></i>
-              </a>
-              <a href="#solutions" class="btn btn-outline-cta">
-                Explore Solutions <i class="bi bi-arrow-right ms-2"></i>
-              </a>
-            </div>
-          </div>
+            <a href="#demo" class="btn btn-primary-cta">
+                Request Demo
+                <i class="bi bi-arrow-right"></i>
+            </a>
 
-           <!-- Right Column: Hero Image -->
-                 <div class="col-lg-6 hero-fade" data-delay="200">
-                 <div class="hero-image-wrapper">
-        <div class="hero-image-shape"></div>
+            <a href="#solutions" class="btn btn-outline-cta">
+                Explore Solutions
+                <i class="bi bi-arrow-right"></i>
+            </a>
 
-        <img
-            src="assests/Home-image.png"
-            alt="Tasktel Technologies"
-            class="hero-illustration"
-        >
+        </div>
+
     </div>
 
 </div>
-    </section>
-      <section id="partners" class="partners-section">
-        <div class="container">
-            <div class="partners-heading text-center">
-                <h2 class="partners-title">Trusted by Leading Global Technology Partners</h2>
-                <p class="partners-subtitle">
-                    We collaborate with globally recognized technology leaders to deliver world-class AV,
-                    Unified Communication, Digital Signage, and Smart Workplace solutions.
-                </p>
-            </div>
-        </div>
  
-        <!-- Marquee: full-bleed, edge-fade wrapper. Track content is generated in js/home.js
-             from the PARTNER_LOGOS array and duplicated once for a seamless infinite loop. -->
-        <div class="partners-marquee-wrapper">
-            <div class="partners-marquee" id="partnersMarquee">
-                <!-- Logo cards are injected here by JavaScript -->
-            </div>
-        </div>
-    </section>
-    <section id="stats" class="stats-section">
-  <div class="stats-bg-image" aria-hidden="true"></div>
-  <div class="stats-overlay" aria-hidden="true"></div>
+  </section>
  
-  <div class="container position-relative">
- 
-    <div class="text-center stats-heading">
-      <span class="stats-tag">Our Track Record</span>
-      <h2 class="stats-title">Trusted by leading enterprise Across India</h2>
-      <p class="stats-desc">
-        Are your trusted partner in Video conferencing system, EPBX solutions, Advanced Meeting Room setups, and Personal Workspace Solutions, serving business across India.
-We empower businesses with cutting-edge communication technology that transforms how your team connects, collaborates and stay productive.
-      </p>
-    </div>
- 
-    <div class="row gx-4 gy-4 stats-row">
- 
-      <!-- Card 1: Years of Experience -->
-      <div class="col-12 col-sm-6 col-lg-3">
-        <div class="stat-card card-blue-deep" style="--delay:0s">
-          <div class="stat-icon">
-            <i class="bi bi-award-fill"></i>
-          </div>
-          <h3 class="stat-number" data-count="24" data-suffix="+">0+</h3>
-          <p class="stat-label">Years of Experience</p>
-        </div>
-      </div>
- 
-      <!-- Card 2: Completed Projects -->
-      <div class="col-12 col-sm-6 col-lg-3">
-        <div class="stat-card card-lime" style="--delay:0.1s">
-          <div class="stat-icon">
-            <i class="bi bi-check2-circle"></i>
-          </div>
-          <h3 class="stat-number" data-count="1000" data-suffix="+">0+</h3>
-          <p class="stat-label">Completed Projects</p>
-          <span class="stat-tagline">PAN India</span>
-        </div>
-      </div>
- 
-      <!-- Card 3: Happy Clients -->
-      <div class="col-12 col-sm-6 col-lg-3">
-        <div class="stat-card card-blue" style="--delay:0.2s">
-          <div class="stat-icon">
-            <i class="bi bi-emoji-smile-fill"></i>
-          </div>
-          <h3 class="stat-number" data-count="5000" data-suffix="+">0+</h3>
-          <p class="stat-label">Happy Clients</p>
-          <span class="stat-tagline">PAN India</span>
-        </div>
-      </div>
- 
-      <!-- Card 4: Team -->
-      <div class="col-12 col-sm-6 col-lg-3">
-        <div class="stat-card card-purple" style="--delay:0.3s">
-          <div class="stat-icon">
-            <i class="bi bi-people-fill"></i>
-          </div>
-          <h3 class="stat-number" data-count="70" data-suffix="+">0+</h3>
-          <p class="stat-label">Team</p>
-        </div>
-      </div>
- 
-    </div>
-  </div>
-</section>
+  
 
     <!-- Bootstrap 5.3 JS Bundle (place a local copy at Bootstrap/js/bootstrap.bundle.min.js to go fully offline) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
