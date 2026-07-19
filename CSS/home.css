@@ -562,3 +562,406 @@ a {
     .hero-badge { padding: .5rem 1rem; font-size: .88rem; }
     .hero-content { padding: 20px; }
 }
+
+/* ============================================================================
+   HOME PAGE — SOLUTIONS SECTION ANIMATION UPGRADE (CSS)
+   Paste this block at the end of your existing CSS/home.css (or
+   CSS/solutions.css if that's the file your #solutions section already
+   uses). It only ADDS rules — nothing here overrides classes you didn't
+   already have (.solution-menu, .solution-item, .solution-card, etc.),
+   so it's safe to append even if home.css already styles those.
+   Requires AOS's stylesheet in <head>:
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+   ============================================================================ */
+
+/* ---------------------------- MENU ITEM MICRO-INTERACTIONS ---------------------------- */
+.solution-menu .solution-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s ease, box-shadow 0.35s ease, padding-left 0.35s ease;
+}
+
+.solution-item-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.35;
+  flex-shrink: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.solution-item-arrow {
+  margin-left: auto;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.solution-menu .solution-item:hover {
+  transform: translateX(6px);
+  padding-left: 1.35rem;
+}
+
+.solution-menu .solution-item:hover .solution-item-arrow,
+.solution-menu .solution-item.active .solution-item-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.solution-menu .solution-item.active .solution-item-dot {
+  opacity: 1;
+  transform: scale(1.3);
+}
+
+/* Animated left accent bar that grows in on the active item */
+.solution-menu .solution-item::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #1b4cdb, #17d9c4);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.solution-menu .solution-item.active::before {
+  transform: scaleY(1);
+}
+
+/* ---------------------------- IMAGE / CARD CROSSFADE ---------------------------- */
+#solutionsImageWrap {
+  position: relative;
+  isolation: isolate;
+}
+
+.solution-glow {
+  position: absolute;
+  inset: -15%;
+  background: radial-gradient(circle, rgba(27, 76, 219, 0.35), transparent 65%);
+  filter: blur(30px);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+#solutionsImageWrap:hover .solution-glow,
+#solutionsImageWrap.is-glowing .solution-glow {
+  opacity: 1;
+}
+
+#solutionImage {
+  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+#solutionImage.is-fading {
+  opacity: 0;
+  transform: scale(1.03);
+}
+
+/* Title / description swap fade (JS toggles .is-fading, matching the image) */
+#solutionTitle,
+#solutionDescription {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+#solutionTitle.is-fading,
+#solutionDescription.is-fading {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* Feature list items cascade in whenever content refreshes */
+.solution-card ul li {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: solutionFeatureIn 0.5s ease forwards;
+}
+.solution-card ul li:nth-child(1) { animation-delay: 0.05s; }
+.solution-card ul li:nth-child(2) { animation-delay: 0.12s; }
+.solution-card ul li:nth-child(3) { animation-delay: 0.19s; }
+.solution-card ul li:nth-child(4) { animation-delay: 0.26s; }
+
+@keyframes solutionFeatureIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card lift on hover for a subtle luxury feel */
+.solution-card {
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+.solution-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 40px 70px -30px rgba(15, 37, 87, 0.45);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .solution-menu .solution-item,
+  .solution-item-dot,
+  .solution-item-arrow,
+  #solutionImage,
+  #solutionTitle,
+  #solutionDescription,
+  .solution-card,
+  .solution-card ul li {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+
+/* ==========================================================================
+   SERVICES SECTION
+   ========================================================================== */
+
+.services-section {
+    position: relative;
+    padding: 6.5rem 0;
+    background-color: #ffffff;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* -------------------- Decorative background blobs -------------------- */
+.services-bg-shapes {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.services-blob {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--tt-blue-light), transparent 70%);
+    opacity: 0.7;
+    filter: blur(2px);
+    animation: floatDrift 11s ease-in-out infinite;
+}
+
+.blob-1 { top: -120px; right: -100px; width: 420px; height: 420px; }
+.blob-2 { bottom: -140px; left: -120px; width: 380px; height: 380px; animation-delay: 1.5s; }
+
+.services-heading {
+    max-width: 640px;
+    margin: 0 auto 3.5rem;
+}
+
+.section-badge {
+    display: inline-block;
+    margin-bottom: 1.1rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: var(--tt-radius-pill);
+    background-color: var(--tt-blue-light);
+    color: var(--tt-blue-dark);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.services-title {
+    margin-bottom: 1rem;
+    color: var(--tt-navy);
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+}
+
+.services-subtitle {
+    color: var(--tt-text-body);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s,
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+
+.services-heading.is-visible .section-badge,
+.services-heading.is-visible .services-title,
+.services-heading.is-visible .services-subtitle {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* -------------------- Cards -------------------- */
+.service-card {
+    position: relative;
+    height: 100%;
+    padding: 2.3rem 1.9rem 2rem;
+    border: 1px solid var(--tt-border);
+    border-radius: var(--tt-radius-lg);
+    background-color: #ffffff;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+    transform-style: preserve-3d;
+    perspective: 800px;
+    will-change: transform;
+}
+
+/* gradient top bar — grows in from the left on hover */
+.service-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--tt-blue), #8FC0FF);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* soft radial spotlight that fades in behind the icon on hover */
+.service-card::after {
+    content: "";
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--tt-blue-light) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.service-card:hover,
+.service-card:focus-visible {
+    border-color: transparent;
+    box-shadow: 0 24px 48px rgba(15, 42, 82, 0.14),
+                0 4px 12px rgba(37, 99, 235, 0.08);
+    transform: translateY(-10px);
+    outline: none;
+}
+
+.service-card:hover::before { transform: scaleX(1); }
+.service-card:hover::after  { opacity: 1; }
+
+.service-card__icon {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    margin-bottom: 1.5rem;
+    border-radius: var(--tt-radius-md);
+    background-color: var(--tt-blue-light);
+    color: var(--tt-blue);
+    font-size: 1.55rem;
+    transition: background 0.4s ease, color 0.4s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.4s ease;
+}
+
+.service-card:hover .service-card__icon {
+    background: linear-gradient(135deg, var(--tt-blue), var(--tt-blue-dark));
+    color: #ffffff;
+    transform: rotate(-8deg) scale(1.12);
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.35);
+}
+
+.service-card h3 {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0.6rem;
+    color: var(--tt-navy);
+    font-size: 1.18rem;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.service-card:hover h3 { color: var(--tt-blue-dark); }
+
+.service-card p {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.6rem;
+    color: var(--tt-text-body);
+    font-size: 0.96rem;
+    line-height: 1.65;
+}
+
+.service-card__link {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--tt-navy);
+    font-size: 0.94rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.service-card__link i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--tt-blue-light);
+    color: var(--tt-blue);
+    font-size: 0.85rem;
+    transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease;
+}
+
+.service-card:hover .service-card__link { color: var(--tt-blue-dark); }
+
+.service-card:hover .service-card__link i {
+    background: var(--tt-blue);
+    color: #ffffff;
+    transform: translateX(4px) rotate(-40deg);
+}
+
+/* -------------------- Entrance animation (stagger-in via JS) -------------------- */
+.service-card.reveal-up {
+    opacity: 0;
+    transform: translateY(48px) scale(0.97);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card.reveal-up.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .service-card.reveal-up,
+    .services-heading .section-badge,
+    .services-heading .services-title,
+    .services-heading .services-subtitle,
+    .services-blob {
+        transition: none !important;
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* -------------------- Responsive -------------------- */
+@media (max-width: 991.98px) {
+    .services-section { padding: 4.5rem 0; }
+    .services-title { font-size: 2rem; }
+    .services-blob { display: none; }
+}
+
+@media (max-width: 575.98px) {
+    .services-section { padding: 3.5rem 0; }
+    .service-card { padding: 1.9rem 1.6rem 1.7rem; }
+    .service-card:hover { transform: translateY(-6px); }
+}

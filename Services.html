@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Services | TaskTel Technologies</title>
+    <meta name="description" content="Explore TaskTel's meeting room, AV integration, unified communications, digital signage, smart workplace and managed support services." />
+
+    <!-- ADD YOUR FAVICON LINE HERE -->
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="CSS/home.css" />
+    <link rel="stylesheet" href="CSS/Services.css">
+    <!-- NEW: reusable animation utility classes (fadeUp, glow, shine, etc.) -->
+    <link rel="stylesheet" href="CSS/animations.css">
+    <!-- AOS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/aos@2.3.4/dist/aos.css"
+    />
+  </head>
+  <body>
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header id="mainHeader" class="site-header">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid px-lg-5 px-4">
+          <a class="navbar-brand d-flex align-items-center" href="home.html">
+            <img src="assets/main-logo.png" alt="TaskTel Technologies" class="logo-img" />
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav mx-auto main-nav">
+              <li class="nav-item"><a class="nav-link" href="home.html#about">About</a></li>
+              <li class="nav-item"><a class="nav-link" href="home.html#solutions">Solutions</a></li>
+              <li class="nav-item"><a class="nav-link active" href="home.html#services">Services</a></li>
+              <li class="nav-item"><a class="nav-link" href="home.html#career">Career</a></li>
+              <li class="nav-item"><a class="nav-link" href="home.html#blog">Blog</a></li>
+            </ul>
+            <a href="home.html#contact" class="btn btn-contact d-lg-inline-flex align-items-center ms-lg-3">
+              Get In Touch <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ==================== SERVICE QUICK-SWITCH STRIP ==================== -->
+    <div class="service-switch-strip">
+      <div class="container">
+        <div class="d-flex flex-wrap gap-2 py-3">
+          <a class="switch-pill" data-service-link="meeting-rooms" href="solutions.html?service=meeting-rooms">Meeting Rooms</a>
+          <a class="switch-pill" data-service-link="av-integration" href="solutions.html?service=av-integration">AV Integration</a>
+          <a class="switch-pill" data-service-link="unified-comms" href="solutions.html?service=unified-comms">Unified Comms</a>
+          <a class="switch-pill" data-service-link="digital-signage" href="solutions.html?service=digital-signage">Digital Signage</a>
+          <a class="switch-pill" data-service-link="smart-workplace" href="solutions.html?service=smart-workplace">Smart Workplace</a>
+          <a class="switch-pill" data-service-link="managed-support" href="solutions.html?service=managed-support">Managed Support</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== FULL SERVICE LANDING PAGE (rendered by JS) ====================
+         services.js injects everything below: Hero, sticky sub-nav, Overview,
+         Benefits, Why Choose Us, Process, Technologies, Industries, Gallery,
+         FAQ, and the Contact CTA. Each section manages its own .container,
+         so full-width bands (hero, why-us, cta) can span edge to edge. -->
+    <div id="serviceRoot"></div>
+
+    <!-- Bootstrap -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+      <!-- GSAP -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+      <!-- ScrollTrigger -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+      <!-- SplitType -->
+      <script src="https://unpkg.com/split-type"></script>
+
+      <!-- Lenis -->
+      <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+
+      <!-- AOS -->
+      <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+      <!-- Existing Files -->
+      <script src="Javascript/home.js"></script>
+
+      <!-- NEW: must load BEFORE services.js — it defines window.TT_initAnimations,
+           which services.js calls at the end of its own script -->
+      <script src="Javascript/Sol_Animations.js"></script>
+      <script src="Javascript/services.js"></script>
+
+      <!-- NEW: must load after Lenis/GSAP; order vs. services.js/animations.js
+           doesn't matter, it only wires up scroll behaviour -->
+      <script src="Javascript/smooth-scroll.js"></script>
+  </body>
+</html>

@@ -1,0 +1,289 @@
+/* ==========================================================================
+   TASKTEL SOLUTIONS PAGE — ANIMATIONS STYLESHEET
+   All keyframes, transitions, and animation-state classes.
+   Structural / color rules live in solutions.css.
+   ========================================================================== */
+
+/* Respect reduced motion preference globally */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------- FLOATING BLOBS ---------------------------- */
+.pw-blob-a { animation: pwBlobFloatA 16s ease-in-out infinite; }
+.pw-blob-b { animation: pwBlobFloatB 20s ease-in-out infinite; }
+.pw-blob-c { animation: pwBlobFloatC 14s ease-in-out infinite; }
+
+@keyframes pwBlobFloatA {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, 30px) scale(1.08); }
+}
+@keyframes pwBlobFloatB {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-30px, -40px) scale(1.1); }
+}
+@keyframes pwBlobFloatC {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, -25px) scale(0.95); }
+}
+
+/* ---------------------------- SVG WAVE MOTION ---------------------------- */
+.pw-wave-back { animation: pwWaveDrift 18s linear infinite; }
+.pw-wave-front { animation: pwWaveDrift 12s linear infinite reverse; }
+
+@keyframes pwWaveDrift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ---------------------------- PARTICLES ---------------------------- */
+.pw-particle { animation: pwParticleFloat linear infinite; }
+
+@keyframes pwParticleFloat {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-120vh) translateX(20px); opacity: 0; }
+}
+
+/* ---------------------------- HERO TEXT REVEAL ---------------------------- */
+.split-line {
+  display: block;
+  transform: translateY(100%);
+  opacity: 0;
+}
+.split-line.is-revealed {
+  animation: pwLineReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes pwLineReveal {
+  to { transform: translateY(0); opacity: 1; }
+}
+
+[data-split-fade] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+[data-split-fade].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------------------------- COUNTER PULSE (subtle) ---------------------------- */
+.pw-counter-num.is-counting { color: var(--pw-cyan); }
+
+/* ---------------------------- IMAGE COMPOSITION ENTRANCE ---------------------------- */
+.pw-img-main {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+}
+.pw-img-main.is-visible { opacity: 1; transform: translateX(0); }
+
+.pw-img-float-top {
+  opacity: 0;
+  transform: translateY(-60px) rotate(-6deg);
+  transition: opacity 0.9s ease 0.3s, transform 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.3s;
+}
+.pw-img-float-top.is-visible { opacity: 1; transform: translateY(0) rotate(0); }
+
+.pw-img-float-bottom {
+  opacity: 0;
+  transform: translateY(60px) rotate(6deg);
+  transition: opacity 0.9s ease 0.5s, transform 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.5s;
+}
+.pw-img-float-bottom.is-visible { opacity: 1; transform: translateY(0) rotate(0); }
+
+.pw-tech-icon { animation: pwIconFloat 5s ease-in-out infinite; }
+.icon-1 { animation-delay: 0s; }
+.icon-2 { animation-delay: 1.1s; }
+.icon-3 { animation-delay: 2.1s; }
+.icon-4 { animation-delay: 0.6s; }
+
+@keyframes pwIconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+/* Mouse parallax targets (JS sets --px/--py) */
+.pw-image-comp { --px: 0px; --py: 0px; }
+.pw-img-float-top { transform: translate(var(--px), calc(var(--py) - 0px)); }
+
+/* Scroll indicator bounce */
+.pw-scroll-indicator span { animation: pwScrollLine 1.8s ease-in-out infinite; }
+@keyframes pwScrollLine {
+  0%, 100% { transform: scaleY(1); opacity: 0.6; }
+  50% { transform: scaleY(0.5); opacity: 1; }
+}
+
+/* ---------------------------- SOLUTION NAVIGATOR STAGE ---------------------------- */
+.pw-stage-image { opacity: 1; }
+.pw-nav-bg { animation: pwNavBgRotate 30s linear infinite; }
+@keyframes pwNavBgRotate {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(20deg); }
+}
+
+.pw-solution-item {
+  transition: background 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+}
+.pw-solution-item:hover { transform: translateX(6px); }
+.pw-item-arrow { transition: opacity 0.3s ease, transform 0.3s ease; }
+.pw-solution-item:hover .pw-item-arrow { opacity: 1; transform: translateX(4px); }
+
+/* Stage image tilt-on-hover */
+.pw-stage-image-wrap {
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease;
+}
+
+/* ---------------------------- MARQUEE ---------------------------- */
+.pw-marquee-track {
+  animation: pwMarqueeLeft 32s linear infinite;
+}
+.pw-marquee-row[data-direction="right"] .pw-marquee-track {
+  animation-name: pwMarqueeRight;
+  animation-duration: 38s;
+}
+.pw-marquee-row:hover .pw-marquee-track { animation-play-state: paused; }
+
+@keyframes pwMarqueeLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes pwMarqueeRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.pw-logo-card {
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  position: relative;
+}
+.pw-logo-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.35); }
+.pw-logo-card::before {
+  content: "";
+  position: absolute; inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg, var(--pw-blue), var(--pw-cyan), var(--pw-blue));
+  background-size: 200% 200%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: pwGradientShift 6s ease infinite;
+}
+.pw-logo-card:hover::before { opacity: 1; }
+
+@keyframes pwGradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ---------------------------- WHY CHOOSE GLOW ---------------------------- */
+.pw-why-glow { animation: pwGlowPulse 8s ease-in-out infinite; }
+@keyframes pwGlowPulse {
+  0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+  50% { opacity: 0.9; transform: translateX(-50%) scale(1.08); }
+}
+
+.pw-why-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease, border-color 0.3s ease;
+}
+.pw-why-card.is-visible { opacity: 1; transform: translateY(0); }
+.pw-why-card:hover { border-color: rgba(255,255,255,0.32); transform: translateY(-6px); }
+
+/* ---------------------------- TIMELINE ---------------------------- */
+.pw-timeline-step {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.pw-timeline-step.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ---------------------------- SHOWCASE MASK REVEAL ---------------------------- */
+.pw-mask-reveal { position: relative; overflow: hidden; }
+.pw-mask-reveal img {
+  transform: scale(1.15);
+  transition: transform 1.2s cubic-bezier(0.16,1,0.3,1);
+}
+.pw-mask-reveal::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--pw-navy);
+  transform-origin: right;
+  transition: transform 1s cubic-bezier(0.83,0,0.17,1);
+}
+.pw-showcase-row.is-visible .pw-mask-reveal::after { transform: scaleX(0); }
+.pw-showcase-row.is-visible .pw-mask-reveal img { transform: scale(1); }
+
+.pw-showcase-copy {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+}
+.pw-showcase-row.is-visible .pw-showcase-copy { opacity: 1; transform: translateY(0); }
+
+/* ---------------------------- INDUSTRIES 3D TILT ---------------------------- */
+.pw-industry-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.pw-industry-card:hover {
+  border-color: rgba(255,255,255,0.3);
+  box-shadow: var(--pw-shadow-soft);
+}
+.pw-industry-card i { transition: transform 0.3s ease; }
+.pw-industry-card:hover i { transform: translateZ(20px) scale(1.15); }
+
+/* ---------------------------- TESTIMONIALS ---------------------------- */
+.pw-testimonial-slide {
+  transition: opacity 0.6s ease;
+}
+.pw-testimonial-progress span { transition: width linear; }
+
+/* ---------------------------- ACCORDION ---------------------------- */
+.pw-accordion-panel { transition: max-height 0.45s cubic-bezier(0.16,1,0.3,1); }
+.pw-accordion-trigger i { transition: transform 0.35s ease; }
+.pw-accordion-item.is-open .pw-accordion-trigger i { transform: rotate(45deg); }
+
+/* ---------------------------- CTA ---------------------------- */
+.pw-cta-bg { animation: pwCtaGradient 10s ease infinite; }
+@keyframes pwCtaGradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.pw-magnetic-btn::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: rgba(27,76,219,0.25);
+  transform: scale(0);
+  opacity: 0;
+}
+.pw-magnetic-btn.is-rippling::after {
+  animation: pwRipple 0.6s ease-out;
+}
+@keyframes pwRipple {
+  0% { transform: scale(0); opacity: 0.6; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* ---------------------------- GENERIC SCROLL-REVEAL UTILITY ---------------------------- */
+.pw-reveal-up {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.pw-reveal-up.is-visible { opacity: 1; transform: translateY(0); }

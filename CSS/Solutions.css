@@ -1,0 +1,645 @@
+/* ==========================================================================
+   TASKTEL SOLUTIONS PAGE — CORE STYLESHEET
+   Design tokens, layout, and static component styling.
+   Animation-specific rules (keyframes, transitions, scroll states) live in
+   animations.css to keep this file focused on structure and appearance.
+   ========================================================================== */
+
+/* ---------------------------- DESIGN TOKENS ---------------------------- */
+:root {
+  /* Color: Dark Blue + White, Modern Enterprise */
+  --pw-ink: #071233;          /* deepest background */
+  --pw-navy: #0f2557;         /* section background */
+  --pw-navy-soft: #16336f;    /* elevated surface */
+  --pw-blue: #1b4cdb;         /* primary accent */
+  --pw-blue-bright: #4d7dff;  /* gradient highlight */
+  --pw-cyan: #17d9c4;         /* secondary accent */
+  --pw-white: #f5f8ff;
+  --pw-white-dim: rgba(245, 248, 255, 0.72);
+  --pw-white-faint: rgba(245, 248, 255, 0.48);
+  --pw-glass-bg: rgba(255, 255, 255, 0.06);
+  --pw-glass-border: rgba(255, 255, 255, 0.14);
+  --pw-glass-bg-strong: rgba(255, 255, 255, 0.1);
+
+  /* Type */
+  --pw-font-display: "Sora", "Inter", sans-serif;
+  --pw-font-body: "Inter", sans-serif;
+
+  /* Radii & shadow */
+  --pw-radius-lg: 28px;
+  --pw-radius-md: 18px;
+  --pw-radius-sm: 12px;
+  --pw-shadow-soft: 0 30px 60px -20px rgba(3, 10, 30, 0.55);
+
+  /* Spacing rhythm */
+  --pw-section-pad: 8rem;
+}
+
+@media (max-width: 767px) {
+  :root { --pw-section-pad: 4.5rem; }
+}
+
+/* ---------------------------- BASE ---------------------------- */
+body {
+  background: var(--pw-ink);
+  color: var(--pw-white);
+  font-family: var(--pw-font-body);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--pw-font-display);
+  color: var(--pw-white);
+  letter-spacing: -0.01em;
+}
+
+a { text-decoration: none; }
+
+.pw-eyebrow {
+  display: inline-block;
+  font-family: var(--pw-font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pw-cyan);
+  margin-bottom: 1rem;
+}
+
+.pw-section-head {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 4rem;
+}
+
+.pw-section-title {
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-weight: 700;
+}
+
+/* Glassmorphism base card */
+.pw-glass-card {
+  background: var(--pw-glass-bg);
+  border: 1px solid var(--pw-glass-border);
+  border-radius: var(--pw-radius-lg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: var(--pw-shadow-soft);
+}
+
+.pw-btn-primary {
+  background: linear-gradient(135deg, var(--pw-blue), var(--pw-blue-bright));
+  color: #fff;
+  border-radius: 50px;
+  padding: 0.85rem 1.9rem;
+  font-weight: 600;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pw-btn-outline {
+  background: transparent;
+  color: var(--pw-white);
+  border: 1px solid var(--pw-glass-border);
+  border-radius: 50px;
+  padding: 0.85rem 1.9rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   HEADER (shared look with home page)
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(7, 18, 51, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--pw-glass-border);
+}
+
+.logo-img { height: 38px; }
+
+.main-nav .nav-link {
+  color: var(--pw-white-dim);
+  font-weight: 500;
+  margin: 0 0.6rem;
+}
+
+.main-nav .nav-link.active,
+.main-nav .nav-link:hover { color: var(--pw-white); }
+
+.btn-contact {
+  background: linear-gradient(135deg, var(--pw-blue), var(--pw-cyan));
+  color: #fff;
+  border-radius: 50px;
+  padding: 0.6rem 1.4rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   1. PREMIUM HERO
+   ========================================================================== */
+.pw-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+  background: radial-gradient(ellipse at top left, var(--pw-navy) 0%, var(--pw-ink) 65%);
+  overflow: hidden;
+}
+
+.pw-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 78%);
+}
+
+.pw-hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.pw-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--pw-cyan);
+  opacity: 0.5;
+}
+
+.pw-hero-blobs { position: absolute; inset: 0; z-index: 0; }
+.pw-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.45;
+}
+.pw-blob-a { width: 480px; height: 480px; background: var(--pw-blue); top: -120px; left: -100px; }
+.pw-blob-b { width: 380px; height: 380px; background: var(--pw-cyan); bottom: -100px; right: -80px; }
+.pw-blob-c { width: 300px; height: 300px; background: var(--pw-blue-bright); top: 40%; left: 55%; }
+
+.pw-hero-wave {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 240px;
+  z-index: 1;
+}
+.pw-hero-wave svg { width: 100%; height: 100%; }
+.pw-wave-back { fill: rgba(27, 76, 219, 0.25); }
+.pw-wave-front { fill: rgba(23, 217, 196, 0.18); }
+
+.pw-hero-heading {
+  font-size: clamp(2.4rem, 4.4vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.12;
+  margin-bottom: 1.4rem;
+}
+.pw-hero-heading .split-line { overflow: hidden; display: block; }
+
+.pw-hero-sub {
+  color: var(--pw-white-dim);
+  font-size: 1.08rem;
+  max-width: 520px;
+  margin-bottom: 2rem;
+}
+
+.pw-hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+
+.pw-hero-counters { display: flex; gap: 2.6rem; flex-wrap: wrap; }
+.pw-counter { color: var(--pw-white); }
+.pw-counter-num { font-family: var(--pw-font-display); font-size: 2rem; font-weight: 700; }
+.pw-counter-suffix { font-size: 1.4rem; font-weight: 700; color: var(--pw-cyan); }
+.pw-counter p { color: var(--pw-white-faint); font-size: 0.85rem; margin: 0; }
+
+/* Hero image composition */
+.pw-image-comp {
+  position: relative;
+  max-width: 460px;
+  margin: 0 auto;
+  aspect-ratio: 4 / 5;
+}
+.pw-glow {
+  position: absolute;
+  inset: -10%;
+  background: radial-gradient(circle, rgba(27,76,219,0.35), transparent 65%);
+  filter: blur(10px);
+  z-index: 0;
+}
+.pw-img-main {
+  position: relative;
+  z-index: 2;
+  width: 82%;
+  border-radius: var(--pw-radius-lg);
+  box-shadow: var(--pw-shadow-soft);
+  object-fit: cover;
+  height: 100%;
+  margin-left: 9%;
+}
+.pw-img-float {
+  position: absolute;
+  z-index: 3;
+  width: 42%;
+  border-radius: var(--pw-radius-md);
+  overflow: hidden;
+  box-shadow: var(--pw-shadow-soft);
+  border: 1px solid var(--pw-glass-border);
+}
+.pw-img-float img { width: 100%; display: block; }
+.pw-img-float-top { top: -6%; left: -4%; }
+.pw-img-float-bottom { bottom: -6%; right: -2%; }
+
+.pw-tech-icon {
+  position: absolute;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--pw-glass-bg-strong);
+  border: 1px solid var(--pw-glass-border);
+  color: var(--pw-cyan);
+  font-size: 1.2rem;
+  z-index: 4;
+  backdrop-filter: blur(10px);
+}
+.icon-1 { top: 8%; right: 4%; }
+.icon-2 { top: 42%; left: -8%; }
+.icon-3 { bottom: 20%; right: -6%; }
+.icon-4 { bottom: 2%; left: 20%; }
+
+.pw-scroll-indicator {
+  position: absolute;
+  bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  background: none; border: none; color: var(--pw-white-faint);
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  z-index: 3;
+}
+.pw-scroll-indicator span {
+  width: 1px; height: 34px;
+  background: var(--pw-white-faint);
+}
+
+/* ==========================================================================
+   2. INTERACTIVE SOLUTION NAVIGATOR
+   ========================================================================== */
+.pw-navigator {
+  position: relative;
+  padding: var(--pw-section-pad) 0;
+  background: var(--pw-navy);
+  overflow: hidden;
+  transition: background 0.6s ease;
+}
+.pw-nav-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(27,76,219,0.25), transparent 55%);
+  transition: background 0.6s ease;
+  z-index: 0;
+}
+
+.pw-nav-sticky { position: sticky; top: 7rem; }
+
+.pw-solution-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.9rem; }
+
+.pw-solution-item {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1.1rem 1.4rem;
+  border-radius: var(--pw-radius-md);
+  background: var(--pw-glass-bg);
+  border: 1px solid var(--pw-glass-border);
+  cursor: pointer;
+}
+.pw-item-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.08);
+  color: var(--pw-cyan);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.pw-item-text strong { display: block; font-size: 1rem; }
+.pw-item-text small { color: var(--pw-white-faint); font-size: 0.8rem; }
+.pw-item-arrow { margin-left: auto; opacity: 0; color: var(--pw-cyan); }
+
+.pw-solution-item.is-active {
+  background: linear-gradient(135deg, rgba(27,76,219,0.35), rgba(23,217,196,0.18));
+  border-color: rgba(255,255,255,0.28);
+}
+.pw-solution-item.is-active .pw-item-arrow { opacity: 1; }
+
+.pw-nav-stage {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.4rem;
+}
+@media (min-width: 992px) {
+  .pw-nav-stage { grid-template-columns: 1fr 1fr; align-items: center; }
+}
+
+.pw-stage-image-wrap { position: relative; aspect-ratio: 4/3; }
+.pw-stage-glow {
+  position: absolute; inset: -12%;
+  background: radial-gradient(circle, rgba(27,76,219,0.4), transparent 65%);
+  filter: blur(12px);
+  z-index: 0;
+}
+.pw-stage-image {
+  position: relative; z-index: 1;
+  width: 100%; height: 100%; object-fit: cover;
+  border-radius: var(--pw-radius-lg);
+  box-shadow: var(--pw-shadow-soft);
+}
+.pw-stage-float {
+  position: absolute; z-index: 2;
+  width: 90px; height: 90px;
+  border-radius: var(--pw-radius-sm);
+  padding: 14px;
+  background: var(--pw-glass-bg-strong);
+  border: 1px solid var(--pw-glass-border);
+  backdrop-filter: blur(10px);
+}
+.pw-stage-float img { width: 100%; height: 100%; object-fit: contain; }
+.pw-stage-float-top { top: -8%; left: -6%; }
+.pw-stage-float-bottom { bottom: -8%; right: -6%; }
+
+.pw-stage-icons {
+  position: absolute;
+  bottom: 6%; left: 6%;
+  display: flex; gap: 0.6rem;
+  z-index: 2;
+}
+.pw-stage-icons span {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--pw-glass-bg-strong);
+  border: 1px solid var(--pw-glass-border);
+  color: var(--pw-cyan);
+}
+
+.pw-stage-badge {
+  display: inline-block;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
+  color: var(--pw-cyan); text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+.pw-stage-content h3 { font-size: 2rem; margin-bottom: 0.9rem; }
+.pw-stage-content p { color: var(--pw-white-dim); margin-bottom: 1.4rem; }
+.pw-stage-features { list-style: none; padding: 0; margin-bottom: 1.6rem; }
+.pw-stage-features li { color: var(--pw-white-dim); margin-bottom: 0.6rem; }
+.pw-stage-features i { color: var(--pw-cyan); margin-right: 0.5rem; }
+
+.pw-stage-stats { display: flex; gap: 2.4rem; margin-bottom: 1.8rem; }
+.pw-stage-stats span {
+  display: block; font-family: var(--pw-font-display);
+  font-size: 1.7rem; font-weight: 700; color: var(--pw-white);
+}
+.pw-stage-stats small { color: var(--pw-white-faint); font-size: 0.8rem; }
+
+/* ==========================================================================
+   4. TECHNOLOGY ECOSYSTEM — MARQUEE
+   ========================================================================== */
+.pw-ecosystem { padding: var(--pw-section-pad) 0; background: var(--pw-ink); }
+
+.pw-marquee-row {
+  overflow: hidden;
+  padding: 0.8rem 0;
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+.pw-marquee-track {
+  display: flex;
+  gap: 1.2rem;
+  width: max-content;
+}
+.pw-logo-card {
+  flex-shrink: 0;
+  width: 160px; height: 84px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--pw-radius-md);
+  background: var(--pw-glass-bg);
+  border: 1px solid var(--pw-glass-border);
+  position: relative;
+  overflow: hidden;
+}
+.pw-logo-card img { max-width: 70%; max-height: 46%; filter: grayscale(1) brightness(2); opacity: 0.85; }
+
+/* ==========================================================================
+   5. WHY CHOOSE TASKTEL
+   ========================================================================== */
+.pw-why { position: relative; padding: var(--pw-section-pad) 0; background: var(--pw-navy); overflow: hidden; }
+.pw-why-glow {
+  position: absolute; top: -20%; left: 50%; transform: translateX(-50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(27,76,219,0.3), transparent 70%);
+  filter: blur(20px);
+  z-index: 0;
+}
+.pw-why-card {
+  position: relative; z-index: 1;
+  padding: 2.2rem 1.4rem;
+  text-align: center;
+}
+.pw-why-card i { font-size: 1.8rem; color: var(--pw-cyan); margin-bottom: 0.8rem; display: block; }
+.pw-why-num { font-family: var(--pw-font-display); font-size: 2.4rem; font-weight: 800; }
+.pw-why-card > span:nth-of-type(2) { font-size: 1.6rem; font-weight: 800; color: var(--pw-cyan); }
+.pw-why-card p { color: var(--pw-white-faint); margin: 0.4rem 0 0; }
+
+/* ==========================================================================
+   6. ENTERPRISE PROCESS — TIMELINE
+   ========================================================================== */
+.pw-process { padding: var(--pw-section-pad) 0; background: var(--pw-ink); }
+
+.pw-timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.6rem;
+}
+@media (max-width: 767px) {
+  .pw-timeline { grid-template-columns: 1fr; }
+}
+
+.pw-timeline-line {
+  position: absolute;
+  top: 22px; left: 0; right: 0;
+  height: 2px;
+  background: var(--pw-glass-border);
+  z-index: 0;
+}
+@media (max-width: 767px) { .pw-timeline-line { display: none; } }
+
+.pw-timeline-progress {
+  position: absolute; top: 0; left: 0; height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--pw-blue), var(--pw-cyan));
+}
+
+.pw-timeline-step { position: relative; z-index: 1; }
+.pw-step-marker {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--pw-navy);
+  border: 1px solid var(--pw-glass-border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--pw-font-display); font-weight: 700;
+  color: var(--pw-cyan);
+  margin-bottom: 1.2rem;
+}
+.pw-step-card { padding: 1.6rem; }
+.pw-step-card h4 { margin-bottom: 0.6rem; }
+.pw-step-card p { color: var(--pw-white-faint); font-size: 0.92rem; margin: 0; }
+
+/* ==========================================================================
+   7. SOLUTIONS SHOWCASE
+   ========================================================================== */
+.pw-showcase { padding: var(--pw-section-pad) 0; background: var(--pw-navy); }
+.pw-showcase-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.4rem;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+@media (min-width: 992px) {
+  .pw-showcase-row { grid-template-columns: 1.1fr 0.9fr; }
+  .pw-showcase-reverse { grid-template-columns: 0.9fr 1.1fr; }
+  .pw-showcase-reverse .pw-showcase-media { order: 2; }
+  .pw-showcase-reverse .pw-showcase-copy { order: 1; }
+}
+.pw-showcase-row:last-child { margin-bottom: 0; }
+
+.pw-mask-reveal {
+  border-radius: var(--pw-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--pw-shadow-soft);
+}
+.pw-mask-reveal img { width: 100%; display: block; }
+
+.pw-showcase-copy h3 { font-size: 1.9rem; margin: 0.6rem 0 0.9rem; }
+.pw-showcase-copy p { color: var(--pw-white-dim); }
+
+/* ==========================================================================
+   8. INDUSTRIES
+   ========================================================================== */
+.pw-industries { padding: var(--pw-section-pad) 0; background: var(--pw-ink); }
+.pw-industry-card {
+  perspective: 900px;
+  background: var(--pw-glass-bg);
+  border: 1px solid var(--pw-glass-border);
+  border-radius: var(--pw-radius-md);
+  padding: 2.4rem 1.2rem;
+  text-align: center;
+}
+.pw-industry-card i { font-size: 2rem; color: var(--pw-cyan); margin-bottom: 0.8rem; display: block; }
+.pw-industry-card h5 { margin: 0; font-weight: 600; }
+
+/* ==========================================================================
+   9. CLIENT SUCCESS
+   ========================================================================== */
+.pw-testimonials { padding: var(--pw-section-pad) 0; background: var(--pw-navy); }
+.pw-testimonial-slider { max-width: 760px; margin: 0 auto; position: relative; }
+.pw-testimonial-track { position: relative; min-height: 220px; }
+.pw-testimonial-slide {
+  position: absolute; inset: 0;
+  padding: 2.6rem;
+  opacity: 0;
+  visibility: hidden;
+  text-align: center;
+}
+.pw-testimonial-slide.is-active { opacity: 1; visibility: visible; position: relative; }
+.pw-testimonial-slide p { font-size: 1.2rem; color: var(--pw-white); margin-bottom: 1.4rem; }
+.pw-testimonial-author strong { display: block; }
+.pw-testimonial-author small { color: var(--pw-white-faint); }
+
+.pw-testimonial-progress {
+  height: 3px; background: var(--pw-glass-border);
+  border-radius: 2px; margin-top: 2rem; overflow: hidden;
+}
+.pw-testimonial-progress span {
+  display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--pw-blue), var(--pw-cyan));
+}
+
+/* ==========================================================================
+   10. FAQ ACCORDION
+   ========================================================================== */
+.pw-faq { padding: var(--pw-section-pad) 0; background: var(--pw-ink); }
+.pw-accordion { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+.pw-accordion-item {
+  background: var(--pw-glass-bg);
+  border: 1px solid var(--pw-glass-border);
+  border-radius: var(--pw-radius-md);
+  overflow: hidden;
+}
+.pw-accordion-trigger {
+  width: 100%;
+  background: none; border: none; color: var(--pw-white);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.3rem 1.6rem;
+  font-family: var(--pw-font-display); font-weight: 600; font-size: 1rem;
+  text-align: left;
+}
+.pw-accordion-trigger i { color: var(--pw-cyan); }
+.pw-accordion-panel {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1.6rem;
+}
+.pw-accordion-panel p { color: var(--pw-white-dim); padding-bottom: 1.4rem; margin: 0; }
+.pw-accordion-item.is-open .pw-accordion-panel { max-height: 220px; }
+
+/* ==========================================================================
+   11. CTA
+   ========================================================================== */
+.pw-cta {
+  position: relative;
+  padding: 7rem 0;
+  overflow: hidden;
+  text-align: center;
+}
+.pw-cta-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--pw-blue) 0%, var(--pw-navy) 55%, var(--pw-cyan) 130%);
+  background-size: 200% 200%;
+}
+.pw-cta-title { font-size: clamp(1.9rem, 3.4vw, 2.8rem); margin: 0.6rem 0 1rem; }
+.pw-cta-sub { color: rgba(255,255,255,0.85); max-width: 520px; margin: 0 auto 2.2rem; }
+
+.pw-magnetic-btn {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: #fff; color: var(--pw-ink);
+  border: none; border-radius: 50px;
+  padding: 1rem 2.2rem;
+  font-weight: 700;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.pw-footer {
+  padding: 2rem 0;
+  background: var(--pw-ink);
+  border-top: 1px solid var(--pw-glass-border);
+  color: var(--pw-white-faint);
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================================== */
+@media (max-width: 991px) {
+  .pw-nav-sticky { position: relative; top: 0; margin-bottom: 2.4rem; }
+  .pw-image-comp { max-width: 340px; }
+}
